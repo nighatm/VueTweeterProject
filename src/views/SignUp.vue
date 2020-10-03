@@ -1,12 +1,8 @@
 <template>
   <div id="signup-content">
-    <router-link to="/login">Login</router-link>
-    <img
-      id="twitter-img"
-      src="https://icon-library.com/images/tweeter-icon/tweeter-icon-17.jpg"
-      alt="twitter icon image"
-    />
-    <h1 id="sign-head">Sign up for twitter account!</h1>
+    <h1 id="sign-head">Sign up for Tweeter account!</h1>
+    <router-link to="/login">Already a User.. Login Here!</router-link>
+
     <signup-form />
   </div>
 </template>

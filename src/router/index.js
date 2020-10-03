@@ -2,7 +2,9 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import SignupPage from "../views/SignUp.vue";
 import LoginPage from "../views/Login.vue";
-import HomePage from "../views/HomePage";
+import HomePage from "../views/HomePage.vue";
+import ProfilePage from "../views/Profile.vue";
+import DiscoverPage from "../views/Discover.vue";
 
 Vue.use(VueRouter);
 
@@ -21,6 +23,16 @@ const routes = [
     path: "/homepage",
     name: "home-page",
     component: HomePage
+  },
+  {
+    path: "/profile",
+    name: "profile-page",
+    component: ProfilePage
+  },
+  {
+    path: "/discover",
+    name: "discover-page",
+    component: DiscoverPage
   }
 ];
 

@@ -1,5 +1,6 @@
 <template>
-  <div id="signupform-content">
+  <div id="editprofile-content">
+    <h1>Update/Edit Profile</h1>
     <p>Email</p>
     <input
       type="text"
@@ -37,32 +38,35 @@
       id="birthday-input"
       v-model="birthdate"
     />
-    <br />
-    <button class="tw-button" @click="signupUser">Sign Up!</button>
+    <h3>{{ updateStatus }}</h3>
+    <router-link to="/Login">Login Now</router-link>
+    <div>
+      <button class="tw-button" @click="updateUser">Update..</button>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
-
 export default {
-  name: "signup-form",
   data() {
     return {
       email: " ",
       username: "",
       password: "",
       bio: "",
-      birthdate: ""
+      birthdate: "",
+      updateStatus: "",
+      loginToken: cookies.get("session")
     };
   },
   methods: {
-    signupUser: function() {
+    updateUser: function() {
       axios
         .request({
           url: "https://tweeterest.ml/api/users",
-          method: "post",
+          method: "patch",
           headers: {
             "Content-Type": "application/json",
             "X-Api-Key": "0a7lJfhSqh40fBqUWmIO71IRKww5z9bzzvLNSvLZH5FB9"
@@ -72,41 +76,22 @@ export default {
             password: this.password,
             username: this.username,
             bio: this.bio,
-            birthdate: this.birthdate
+            birthdate: this.birthdate,
+            loginToken: this.loginToken
           }
         })
         .then(response => {
-          // console.log(response);
-          //write logic to ensure token was sent (e.g if)
-          cookies.set("session", response.data.loginToken);
-          this.$router.push("/HomePage");
+          console.log(response);
+          this.updateStatus = "Success";
+          this.$router.push("/Login");
         })
         .catch(error => {
           console.log(error);
-          // this.status = "Login Error!";
+          this.updateStatus = "Error!";
         });
     }
   }
 };
 </script>
 
-<style scoped>
-#signupform-content {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  width: 100%;
-  min-height: 50vh;
-  background-color: #f5f8fa;
-}
-.tw-button {
-  min-width: 150px;
-  color: white;
-  background-color: #1da1f2;
-  font-weight: bold;
-  padding: 12px 18px;
-  border: none;
-  border-radius: 25px;
-  outline: 0;
-}
-</style>
+<style scoped></style>

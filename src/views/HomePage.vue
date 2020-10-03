@@ -1,27 +1,44 @@
 <template>
   <div id="container-home">
-    <h1>This is the home page</h1>
-    <!-- side nav bar -->
-    <div id="side-navigation">
-      <button id="twitter-logo">
-        <i class="fab fa-twitter"></i>
-      </button>
-      <div id="icon">
-        <button>
-          <i></i>
-          <p></p>
-        </button>
-      </div>
+    <h1>This is the User home page</h1>
+    <div>
+      <router-link to="/profile">Settings for account</router-link> |
+
+      <router-link to="/logout">Logout</router-link>
     </div>
-    <router-view />
+    <!-- Navigation bar -->
+    <create-tweets />
+    <show-tweets />
+
+    <!-- <div v-if="loginToken != undefined">
+    
+  </div> -->
+
+    <div>
+      <p>XXXXXXXXXXXX</p>
+      <button class="tw-button">Follow</button>
+      <br />
+      <button class="tw-button">Unfollow</button>
+      <br />
+      <button class="tw-button">Logout</button>
+    </div>
   </div>
 </template>
 <script>
+import cookies from "vue-cookies";
+import CreateTweets from "../components/CreateTweets.vue";
+import ShowTweets from "../components/ShowTweets.vue";
+
 export default {
   name: "home",
-  components: {},
+  components: {
+    CreateTweets,
+    ShowTweets
+  },
   data() {
-    return {};
+    return {
+      loginToken: cookies.get("loginToken")
+    };
   }
 };
 </script>
